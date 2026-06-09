@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malak - 1 Yosh</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lora&family=Montserrat&display=swap');
+        
+        /* Video fon uchun yangi uslub */
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+
+        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #fdf0f5; font-family: 'Montserrat', sans-serif; overflow: hidden; }
+        .book { width: 320px; height: 480px; position: relative; perspective: 2000px; cursor: pointer; }
+        .page { width: 100%; height: 100%; position: absolute; background: white; border-radius: 20px; padding: 30px; box-sizing: border-box; transform-origin: left; transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1); backface-visibility: hidden; border: 1px solid #ffd1dc; display: flex; flex-direction: column; align-items: center; box-shadow: 5px 5px 20px rgba(0,0,0,0.1); }
+        
+        .speaker-btn { position: absolute; top: 15px; left: 15px; font-size: 24px; cursor: pointer; z-index: 10; }
+        .baby-logo { position: absolute; top: 15px; right: 15px; font-size: 24px; }
+        
+        .flip { transform: rotateY(-180deg); }
+        h1 { font-family: 'Dancing Script', cursive; color: #d63384; font-size: 35px; margin-bottom: 10px; }
+        .text { font-family: 'Lora', serif; font-size: 18px; color: #555; text-align: center; line-height: 1.6; }
+        .timer-container { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-top: 20px; }
+        .box { background: #fdf0f5; border: 1px solid #ffd1dc; border-radius: 10px; padding: 10px; text-align: center; }
+        .box span { font-size: 20px; font-weight: bold; color: #d63384; }
+        .box small { display: block; font-size: 11px; color: #888; text-transform: uppercase; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; width: 100%; text-align: center; margin-top: 15px; }
+        .active-day { background: #d63384; color: white; border-radius: 50%; font-weight: bold; }
+        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-top: 15px; }
+        .gallery img { width: 100%; height: 100px; object-fit: cover; border-radius: 10px; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        button { background: #d63384; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<!-- Video foni qo'shildi -->
+<video autoplay muted loop id="bg-video">
+    <source src="fon.mp4" type="video/mp4">
+</video>
+
+<audio id="myAudio" loop>
+    <source src="musiqa.mp3" type="audio/mpeg">
+</audio>
+
+<div class="book" id="book">
+    
+    <!-- 6-bet -->
+    <div class="page" style="z-index: 1;">
+        <div class="speaker-btn" onclick="toggleMusic(event)">🔊</div>
+        <div class="baby-logo">🍼</div>
+        <h1>Tashrifingiz</h1>
+        <input type="text" placeholder="Ism va Familiya">
+        <select><option>Albatta kelaman!</option><option>Afsuski, kelolmayman</option></select>
+        <button onclick="alert('Javobingiz yuborildi!')">Yuborish</button>
+    </div>
+
+    <!-- 5-bet -->
+    <div class="page" style="z-index: 2;">
+        <div class="speaker-btn" onclick="toggleMusic(event)">🔊</div>
+        <div class="baby-logo">🧸</div>
+        <h1>Bayramgacha:</h1>
+        <div class="timer-container">
+            <div class="box"><span id="days">00</span><small>Kun</small></div>
+            <div class="box"><span id="hours">00</span><small>Soat</small></div>
+            <div class="box"><span id="mins">00</span><small>Daqiqa</small></div>
+            <div class="box"><span id="secs">00</span><small>Soniya</small></div>
+        </div>
+    </div>
+
+    <!-- 4-bet -->
+    <div class="page" style="z-index: 3;">
+        <div class="speaker-btn" onclick="toggleMusic(event)">🔊</div>
+        <div class="baby-logo">👶</div>
+        <h1>Manzil</h1>
+        <p>Muzrabot tuman, "Bodomzor" mahallasi Ko'chkak ko'chasi 102-uy</p>
+        <a href="https://maps.app.goo.gl/RHVWobQEHRYzmKox7" style="color: #e70612; font-weight: bold; text-decoration: none;">Xaritada ko'rish</a>
+    </div>
+
+    <!-- 3-bet -->
+    <div class="page" style="z-index: 4;">
+        <div class="speaker-btn" onclick="toggleMusic(event)">🔊</div>
+        <div class="baby-logo">🎠</div>
+        <h1>Xotiralar</h1>
+        <div class="gallery">
+            <img src="https://picsum.photos/200" alt="1"><img src="https://picsum.photos/201" alt="2">
+            <img src="https://picsum.photos/202" alt="3"><img src="https://picsum.photos/203" alt="4">
+        </div>
+    </div>
+
+    <!-- 2-bet -->
+    <div class="page" style="z-index: 5;">
+        <div class="speaker-btn" onclick="toggleMusic(event)">🔊</div>
+        <div class="baby-logo">🎀</div>
+        <h1>Yanvar 2027</h1>
+        <div class="calendar-grid">
+            <div>Du</div><div>Se</div><div>Ch</div><div>Pa</div><div>Ju</div><div>Sh</div><div>Ya</div>
+            <script>for(let i=1; i<=12; i++) document.write(`<div>${i}</div>`);</script>
+            <div class="active-day">13</div>
+            <script>for(let i=14; i<=31; i++) document.write(`<div>${i}</div>`);</script>
+        </div>
+    </div>
+
+    <!-- 1-bet -->
+    <div class="page" style="z-index: 6;">
+        <div class="speaker-btn" onclick="toggleMusic(event)">🔊</div>
+        <div class="baby-logo">🐣</div>
+        <h1>Malak</h1>
+        <div class="text">
+            Bir yil avval dunyoga kelib, hayotimizni nurga, qalbimizni esa cheksiz quvonchga to‘ldirding. Sen bizning eng go‘zal va shirin mo‘jizamizsan!
+        </div>
+    </div>
+</div>
+
+<script>
+    const book = document.getElementById('book');
+    const pages = document.querySelectorAll('.page');
+    let current = pages.length - 1;
+    
+    book.onclick = (e) => { 
+        if(!e.target.classList.contains('speaker-btn')) {
+            if(current >= 0) { pages[current].classList.add('flip'); current--; }
+        }
+    };
+
+    function toggleMusic(e) {
+        e.stopPropagation();
+        const audio = document.getElementById("myAudio");
+        const btns = document.querySelectorAll(".speaker-btn");
+        if (audio.paused) { audio.play(); btns.forEach(b => b.innerText = "🔊"); } 
+        else { audio.pause(); btns.forEach(b => b.innerText = "🔇"); }
+    }
+
+    setInterval(() => {
+        const dest = new Date("Jan 13, 2027 00:00:00").getTime();
+        const now = new Date().getTime();
+        const diff = dest - now;
+        document.getElementById('days').innerText = Math.floor(diff / (1000*60*60*24));
+        document.getElementById('hours').innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+        document.getElementById('mins').innerText = Math.floor((diff % (1000*60*60)) / (1000*60));
+        document.getElementById('secs').innerText = Math.floor((diff % (1000*60)) / 1000);
+    }, 1000);
+</script>
+</body>
+</html>
